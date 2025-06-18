@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component, computed, signal } from "@angular/core";
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,9 +12,12 @@ export class HeroPageComponent {
   name = signal('Ironman');
   age = signal(45);
 
-  getHeroDescription( ) {
-    return `${ this.name() } - ${ this.age() }`;
-  }
+  heroDescription = computed( ()=> {
+    const description = `${ this.name() } - ${ this.age() }`;
+    return description;
+  });
+
+  captalizeName = computed ( () => this.name().toUpperCase());
 
   changeHero(){
     this.name.set('Spiderman');
